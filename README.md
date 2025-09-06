@@ -3,6 +3,9 @@
 ## Executando o web scraping
 > python3 scripts/scraper.py
 
+## Executando a API
+> python3 api/app.py
+
 
 TBD
 
