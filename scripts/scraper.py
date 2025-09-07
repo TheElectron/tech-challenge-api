@@ -8,11 +8,10 @@ from urllib.parse import urljoin
 def scrape_books():
     """
         Function responsible for extracting data from the website 'books.toscrape.com' and storing it in CSV format.
-    """    
+    """
     all_books_data = []
     base_url = "https://books.toscrape.com/"
     url_to_scrape = urljoin(base_url, 'catalogue/page-1.html')
-
     rating_map = {
         'One': '1',
         'Two': '2',
@@ -20,10 +19,8 @@ def scrape_books():
         'Four': '4',
         'Five': '5'
         }
-
     print("*************************************************************************************************")
     print("Starting the Web Scraping...")
-
     while url_to_scrape:
         print(f"\tPage: {url_to_scrape}")
         try:
@@ -71,7 +68,6 @@ def scrape_books():
                 }
                 all_books_data.append(book_data)
                 time.sleep(0.1)
-
             # Netx page
             next_button = soup.find('li', class_='next')
             if next_button:
@@ -80,11 +76,9 @@ def scrape_books():
             else:
                 url_to_scrape = None
                 print("\n\tEnding the Web Scraping...")
-
         except requests.exceptions.RequestException as e:
             print(f"\tAn error occurred accessing the page \n{url_to_scrape}: {e}")
             break
-            
     if not all_books_data:
         print("\tNo data was found.\n\tThe CSV file will not be generated..")
         return
