@@ -1,5 +1,6 @@
 import os
 import csv
+from collections import Counter
 from flask import Flask, jsonify, request
 
 def load_data():
@@ -25,6 +26,7 @@ def load_data():
 BOOKS_DATA, DATA_LOADED_SUCCESSFULLY = load_data()
 app = Flask(__name__)
 
+# Required Endpoints
 @app.route('/api/v1/books', methods=['GET'])
 def get_all_books():
     """
@@ -108,6 +110,87 @@ def health_check():
             "status": "error",
             "message": "API está funcional, mas falhou ao carregar os dados do arquivo CSV.",
         }), 503 # Service Unavailable
+
+# Optional Endpoints
+@app.route('/api/v1/stats/overview', methods=['GET'])
+def get_stats_overview():
+    """
+        Get books overview.
+    """
+    if not DATA_LOADED_SUCCESSFULLY:
+        return jsonify({
+            "error": "error",
+            "message": "Erro ao carregar livros."
+        }), 503 # Service Unavailable
+    total_books = len(BOOKS_DATA)
+    total_price = sum(float(book['Price']) for book in BOOKS_DATA)
+    average_price = round(total_price / total_books, 2)
+    ratings_distribution = Counter(book['Rating'] for book in BOOKS_DATA)
+    ratings = {f"{stars} estrela(s)": count for stars, count in sorted(ratings_distribution.items())}
+    return jsonify({
+        "total_books": total_books,
+        "average_price": f"£{average_price}",
+        "ratings_distribution": ratings
+    }), 200 # OK
+
+@app.route('/api/v1/stats/categories', methods=['GET'])
+def get_stats_categories():
+    """
+        Get stats by category.
+    """
+    if not DATA_LOADED_SUCCESSFULLY:
+        return jsonify({
+            "error": "error",
+            "message": "Erro ao carregar livros."
+        }), 503 # Service Unavailable
+    category_stats = {}
+    categories = set(book['Category'] for book in BOOKS_DATA)
+    for category in categories:
+        books_in_category = [b for b in BOOKS_DATA if b['Category'] == category]
+        count = len(books_in_category)
+        if count > 0:
+            avg_price = round(sum(float(book['Price']) for book in books_in_category) / count, 2)
+        else:
+            avg_price = 0
+        category_stats[category] = {
+            "books": count,
+            "average_price": f"£{avg_price}"
+        }
+    return jsonify(dict(sorted(category_stats.items()))) # OK
+
+@app.route('/api/v1/books/top-rated', methods=['GET'])
+def get_top_rated_books():
+    """
+        Get details of top rating books.
+    """
+    if not DATA_LOADED_SUCCESSFULLY:
+        return jsonify({
+            "error": "error",
+            "message": "Erro ao carregar livros."
+        }), 503 # Service Unavailable
+    top_rated_books = [book for book in BOOKS_DATA if book['Rating'] == '5']
+    return jsonify(top_rated_books) # OK
+
+@app.route('/api/v1/books/price-range', methods=['GET'])
+def get_books_by_price_range():
+    """
+    Filtra livros dentro de uma faixa de preço específica.
+    Ex: /api/v1/books/price-range?min=10&max=20
+    """
+    if not DATA_LOADED_SUCCESSFULLY:
+        return jsonify({
+            "error": "error",
+            "message": "Erro ao carregar livros."
+        }), 503 # Service Unavailable
+    try:
+        min_price = request.args.get('min', default=0, type=float)
+        max_price = request.args.get('max', default=float('inf'), type=float)
+    except ValueError:
+        return jsonify({
+            "error": "error",
+            "message": "Parâmetros inválidos."}), 400 # Bad Request
+    filtered_books = [book for book in BOOKS_DATA if min_price <= float(book['Price']) <= max_price]
+    return jsonify(filtered_books)
 
 if __name__ == '__main__':
     # O modo debug reinicia o servidor automaticamente após alterações no código.

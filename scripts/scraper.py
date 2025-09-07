@@ -13,11 +13,11 @@ def scrape_books():
     base_url = "https://books.toscrape.com/"
     url_to_scrape = urljoin(base_url, 'catalogue/page-1.html')
     rating_map = {
-        'One': '1',
-        'Two': '2',
-        'Three': '3',
-        'Four': '4',
-        'Five': '5'
+        'One': 1,
+        'Two': 2,
+        'Three': 3,
+        'Four': 4,
+        'Five': 5
         }
     print("*************************************************************************************************")
     print("Starting the Web Scraping...")
@@ -43,6 +43,7 @@ def scrape_books():
                 
                 title = book_soup.find('h1').text
                 price = book_soup.find('p', class_='price_color').text
+                price = float(price.replace('Â£', ''))
                 
                 # Rating => class="star-rating"
                 rating_class = book_soup.find('p', class_='star-rating')['class']
