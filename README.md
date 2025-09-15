@@ -6,6 +6,8 @@
 ## Executando a API
 > python3 api/app.py
 
+## Gerando a chave privada
+> python3 -c "import secrets; print(secrets.token_hex(32))"
 
 TBD
 
