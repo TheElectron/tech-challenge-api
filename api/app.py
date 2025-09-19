@@ -1,19 +1,19 @@
-# This file bla bla ...
-
 import os
 import csv
-from flask import Flask, jsonify
+from flasgger import Swagger
 from datetime import timedelta
 from dotenv import load_dotenv
-
+from flask import Flask, jsonify
 from flask_jwt_extended import JWTManager
 
+import db
 from auth import auth_bp
 from routes import routes_bp
 
 def load_books_data():
     """
         Loads the file 'scraped_books.csv' and adds an ID for each book.
+        Returns a tuple (books, success) where 'books' is a list of dictionaries.
     """
     data_path = os.path.join('data', 'scraped_books.csv')
     if not os.path.exists(data_path):
@@ -41,22 +41,44 @@ def create_app():
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=15)
     app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
     jwt = JWTManager(app)
-    # Data Loading
-    books_data, success = load_books_data()
-    app.config['BOOKS_DATA'] = books_data
-    app.config['DATA_LOADED_SUCCESSFULLY'] = success
-    if not success:
-        print("ALERTA: Falha crítica ao carregar os dados dos livros.") # Traduzir essa merda?
+    # Flasgger Config
+    app.config['SWAGGER'] = {
+        'title': 'Books API',
+        'version': '1.0',
+        'description': 'Uma API para consultar dados de livros extraídos por web scraping.',
+        'uiversion': 3,
+        'securityDefinitions': { # Define o esquema de segurança para JWT
+            'Bearer': {
+                'type': 'apiKey',
+                'name': 'Authorization',
+                'in': 'header',
+                'description': 'Token de acesso JWT. Formato: "Bearer <token>"'
+            }
+        },
+        'security': [{'Bearer': []}] # Aplica a segurança JWT a todos os endpoints por padrão
+    }
+    swagger = Swagger(app)
+    # Database Config
+    app.config['DATABASE_PATH'] = os.path.join('data', 'tech_challenge_api.db')
+    db.init_app(app)
     # Blueprints for routes and authentication
     app.register_blueprint(auth_bp)
     app.register_blueprint(routes_bp)
     # Health check endpoint
     @app.route('/api/v1/health', methods=['GET'])
     def health_check():
-        if app.config['DATA_LOADED_SUCCESSFULLY']:
-            return jsonify({"status": "ok", "message": "API está funcional e os dados foram carregados."}), 200
-        else:
-            return jsonify({"status": "error", "message": "API funcional, mas dados não carregados."}), 503
+        try:
+            conn = db.get_db()
+            conn.execute('SELECT * FROM books LIMIT 1')
+            return jsonify({
+                "status": "OK", 
+                "message": "API is functional and database is accessible!"
+            }), 200
+        except Exception as e:
+            return jsonify({
+                "status": "ERROR", 
+                "message": "Failed on health check"
+            }), 503
     return app
 
 if __name__ == '__main__':
