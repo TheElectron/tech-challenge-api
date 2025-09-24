@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# tech-challenge-api
-=======
 # Tech Challenge Api
 
 ## Executando o web scraping
@@ -26,4 +23,3 @@ TBD
 * Documentação das rotas da API.
 * Exemplos de chamadas com requests/responses.
 * Instruções para execução.
->>>>>>> feature/web-scraping

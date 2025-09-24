@@ -1,4 +1,6 @@
 from . import db
+import threading
+from scripts import scraper
 from flask_jwt_extended import jwt_required
 from flask import Blueprint, jsonify, request
 
@@ -458,3 +460,21 @@ def get_books_by_price_range():
   except Exception as e:
     print(f"Error fetching price range: {e}")
     return jsonify({'msg': 'Data not available or failed to load.'}), 500
+
+# Web Scraping Endpoint
+@routes_bp.route('/scraping/trigger', methods=['POST'])
+@jwt_required()
+def trigger_scrape():
+  """
+  Inicia o processo de web scraping em segundo plano.
+  Não espera o processo terminar e retorna uma resposta imediata.
+  """
+  # Verifica se já existe um processo de scraping rodando antes de iniciar outro
+  active_threads = [t.name for t in threading.enumerate()]
+  if 'scraping_thread' in active_threads:
+    return jsonify({"msg": "A scraping process is already running."}), 409
+  # Cria uma thread para executar a função de scraping
+  scrape_thread = threading.Thread(target=scraper.run_scraping_process, name='scraping_thread')
+  # Inicia a execução da thread em segundo plano
+  scrape_thread.start()
+  return jsonify({"status": "accepted", "msg": "The scraping process has started."}), 202

@@ -156,9 +156,25 @@ def save_to_sqlite(books_data):
     print(f"\tData stored successfully. The database can be found at: {output_filepath}")
     print("*************************************************************************************************")
 
-if __name__ == '__main__':
-    setup_database()
-    books = scrape_books()
-    if books:
-        save_to_csv(books)
-        save_to_sqlite(books)
+def run_scraping_process():
+    """
+    Função principal que orquestra todo o processo de scraping e salvamento.
+    Esta é a função que será chamada em segundo plano.
+    """
+    print(">>> [BACKGROUND JOB] - Starting scraping process.")
+    try:
+        setup_database()
+        books = scrape_books()
+        if books:
+            # save_to_csv(books)
+            save_to_sqlite(books)
+        print(">>> [BACKGROUND JOB] - Scraping process completed successfully.")
+    except Exception as e:
+        print(f">>> [BACKGROUND JOB] - Error on scraping process: {e}")
+
+# if __name__ == '__main__':
+#     setup_database()
+#     books = scrape_books()
+#     if books:
+#         save_to_csv(books)
+#         save_to_sqlite(books)
