@@ -6,9 +6,9 @@ from dotenv import load_dotenv
 from flask import Flask, jsonify
 from flask_jwt_extended import JWTManager
 
-import db
-from auth import auth_bp
-from routes import routes_bp
+from . import db
+from .auth import auth_bp
+from .routes import routes_bp
 
 def load_books_data():
     """
@@ -83,4 +83,4 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=True, port=5000)
+    app.run(port=8000)

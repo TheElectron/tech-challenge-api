@@ -1,4 +1,4 @@
-import db
+from . import db
 from flask_jwt_extended import jwt_required
 from flask import Blueprint, jsonify, request
 

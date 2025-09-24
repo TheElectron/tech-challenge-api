@@ -12,6 +12,10 @@
 ## Swagger
 http://127.0.0.1:5000/apidocs/
 
+## Gunicorn
+gunicorn --config gunicorn.conf.py "api.app:create_app()"
+
+
 TBD
 
 * Descrição do projeto e arquitetura.
