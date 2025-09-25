@@ -3,51 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books API</title>
+    <title>Books API - TechChallenge</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+        html {
+            box-sizing: border-box;
+        }
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
         body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            background-color: #f4f7f6;
+            background-color: #f8f8f8; /* Um cinza um pouco mais quente */
             color: #333;
+            padding-bottom: 60px; /* Espaço para o rodapé */
         }
         .container {
             text-align: center;
-            padding: 40px;
+            padding: 40px 50px;
             background-color: white;
             border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            margin: 8px 0;
+            font-weight: 400;
         }
         h1 {
-            color: #2c3e50;
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #922B21; /* Vermelho escuro, quase vinho */
         }
-        p {
-            font-size: 1.1em;
+        h2 {
+            font-size: 1.5em;
+            font-weight: 400;
+            color: #C0392B; /* Vermelho principal, vibrante */
+        }
+        h3 {
+            font-size: 1.2em;
+            font-weight: 300;
+            color: #566573; /* Cinza escuro para contraste */
+            border-top: 1px solid #ecf0f1;
+            padding-top: 15px;
+            margin-top: 15px;
         }
         a {
             display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #3498db;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background-color: #c0392b; /* Vermelho principal */
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: 500;
         }
         a:hover {
-            background-color: #2980b9;
+            background-color: #a93226; /* Vermelho um pouco mais escuro para o hover */
+            transform: translateY(-2px);
+        }
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 15px 0;
+            background-color: #922B21; /* Vermelho escuro do h1 para consistência */
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 0.9em;
+            font-weight: 300;
         }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>📚 Books API</h1>
-        <p>A API está no ar e funcionando corretamente.</p>
-        <a href="/apidocs">Ver a documentação interativa (Swagger UI)</a>
+        <h1>PosTech Fiap</h1>
+        <h2>Machine Learning Eng.</h2>
+        <h3>TechChallenge #01</h3>
+        <a href="/apidocs">Acessar Documentação da API</a>
     </div>
+
+    <footer>
+        Desenvolvido por Vinicius Moraes
+    </footer>
+
 </body>
 </html>
