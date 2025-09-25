@@ -2,9 +2,13 @@ from . import db
 import threading
 from scripts import scraper
 from flask_jwt_extended import jwt_required
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, render_template
 
 routes_bp = Blueprint('routes_bp', __name__, url_prefix='/api/v1')
+
+@routes_bp.route('/', methods=['GET'])
+def index():
+  return render_template('index.html')
 
 # Required Endpoints
 @routes_bp.route('/books', methods=['GET'])
