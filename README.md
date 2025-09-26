@@ -43,8 +43,8 @@ A arquitetura da aplicação é composta por três componentes principais:
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git)
-    cd seu-repositorio
+    git clone https://github.com/TheElectron/tech-challenge-api.git
+    cd tech-challenge-api
     ```
 
 2.  **Crie e ative um ambiente virtual:**  
