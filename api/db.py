@@ -1,5 +1,6 @@
 import os
 import sqlite3
+from scripts import scraper
 from flask import current_app, g
 
 def get_db():
@@ -26,4 +27,5 @@ def init_app(app):
     Registra a função de fechamento do banco de dados com a aplicação Flask.
     Isso garante que close_db() seja chamada após cada requisição.
     """
+    scraper.run_scraping_process()
     app.teardown_appcontext(close_db)
