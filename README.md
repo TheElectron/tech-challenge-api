@@ -31,6 +31,7 @@ A arquitetura da aplicação é composta por três componentes principais:
 
 3.  **API**: O servidor **Flask** (`api/`) que expõe uma série de endpoints para consultar os dados do banco.
 
+![Nome da imagem](tech.svg)
 
 ## ⚙️ Instalação e Configuração
 
@@ -83,7 +84,9 @@ A arquitetura da aplicação é composta por três componentes principais:
     gunicorn --config gunicorn.conf.py "api.app:create_app()"
     ```
 
-    A API estará disponível em http://127.0.0.1:8000.
+    A API estará disponível em http://127.0.0.1:8000/api/v1/.  
+    Você também pode interagir com a versão disponivel online,
+    em https://tech-challenge-api-vjl1.onrender.com/api/v1/.
 
 ## 📖 Documentação das Rotas
 

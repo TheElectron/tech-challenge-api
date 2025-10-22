@@ -15,7 +15,10 @@ def index():
 def get_all_books():
   """
   List all books.
-  Returns a list of all books in the database.
+  Raises: 
+    Raise an exception if there is an error fetching data from the database.
+  Returns:
+    Returns a list of all books in the database.
   ---
   tags:
     - Required Endpoints
@@ -62,7 +65,10 @@ def get_all_books():
 def get_book_by_id(book_id):
   """
   Get a book by ID.
-  Returns details of a book by ID.
+  Raises:
+    Raise an exception if there is an error fetching data from the database.
+  Returns:
+    Returns details of a book by ID.
   ---
   tags:
     - Required Endpoints
@@ -123,7 +129,10 @@ def get_book_by_id(book_id):
 def search_books():
   """
   Search books by title and/or category.
-  Returns a list of books matching the search criteria.
+  Raises:
+    Raise an exception if there is an error fetching data from the database.
+  Returns:
+    Returns all books that match the search criteria.
   ---
   tags:
     - Required Endpoints
@@ -187,14 +196,17 @@ def search_books():
     books_dict = [dict(book) for book in books]
     return jsonify(books_dict)
   except Exception as e:
-    print(f"Error searching books: {e}")
+    print(f"Error fetching books: {e}")
     return jsonify({'msg': 'Data not available or failed to load.'}), 500
 
 @routes_bp.route('/categories', methods=['GET'])
 def get_all_categories():
   """
   Get all categories.
-  Returns a list of all unique book categories.
+  Raises:
+    Raise an exception if there is an error fetching data from the database.
+  Returns:
+    Returns a list of all unique book categories.
   ---
   tags:
     - Required Endpoints
@@ -230,7 +242,10 @@ def get_all_categories():
 def get_stats_overview():
   """
   Get books overview.
-  Returns total number of books, average price, and ratings distribution.
+  Raises:
+    Raise an exception if there is an error fetching data from the database.
+  Returns:
+    Returns total number of books, average price, and ratings distribution.
   ---
   tags:
     - Optional Endpoints
@@ -298,7 +313,10 @@ def get_stats_overview():
 def get_stats_categories():
   """
   Get stats by category.
-  Returns number of books and average price per category.
+  Raises:
+    Raise an exception if there is an error fetching data from the database.
+  Returns:
+    Returns number of books and average price per category.
   ---
   tags:
     - Optional Endpoints
@@ -350,7 +368,10 @@ def get_stats_categories():
 def get_top_rated_books():
   """
   Get details of top rating books.
-  Returns a list of books with a 5-star rating.
+  Raises:
+    Raise an exception if there is an error fetching data from the database.
+  Returns:
+    Returns a list of books with a 5-star rating.
   ---
   tags:
     - Optional Endpoints
@@ -402,7 +423,8 @@ def get_top_rated_books():
 @routes_bp.route('/books/price-range', methods=['GET'])
 def get_books_by_price_range():
   """
-  Filtra livros dentro de uma faixa de preço específica.
+  Get all books that match within a specific price range.
+  Raise an exception if there is an error fetching data from the database.
   Returns a list of books within a specified price range.
   ---
   tags:
@@ -470,8 +492,39 @@ def get_books_by_price_range():
 @jwt_required()
 def trigger_scrape():
   """
-  Inicia o processo de web scraping em segundo plano.
-  Não espera o processo terminar e retorna uma resposta imediata.
+  Starts the web scraping process in the background.
+  (Requires a valid JWT token)
+  Returns a message indicating that the scraping process has started.
+  If a scraping process is already running, it returns a message indicating that.
+  ---
+  tags:
+    - Web Scraping Endpoints
+  security:
+    - Bearer: []
+  parameters:
+    - in: header
+      name: Authorization
+      required: true
+      description: "O Refresh Token válido, precedido pelo esquema 'Bearer '. Exemplo: 'Bearer Bla bla...'"
+      schema:
+        type: string
+  responses:
+    202:
+      description: Returns a message indicating that the scraping process has started.
+      schema:
+        type: object
+        properties:
+          msg:
+            type: string
+    409:
+      description: Returns a message indicating that a scraping process is already running.
+      schema:
+        type: object
+        properties:
+          status:
+            type: string
+          msg:
+            type: string
   """
   # Verifica se já existe um processo de scraping rodando antes de iniciar outro
   active_threads = [t.name for t in threading.enumerate()]
