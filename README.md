@@ -105,7 +105,7 @@ Para mais detalhes, consulte a documentação interativa.
 | :--- | :--- | :--- | :--- |
 | `GET` | `/` | Retorna a página inicial de boas-vindas da API (HTML). | Não |
 | `GET` | `/api/v1/health` | Verifica a saúde da API e a conectividade com o banco de dados. | Não |
-| `GET` | `/api/v1/livros` | Lista todos os livros de forma paginada. Aceita query params `?page` e `?per_page`. | Não |
+| `GET` | `/api/v1/livros` | Lista todos os livros de forma paginada. | Não |
 | `GET` | `/api/v1/livros/<id>` | Busca um livro específico pelo seu `id` numérico. | Não |
 | `GET` | `/api/v1/livros/filter/price` | Filtra os livros por uma faixa de preço. Aceita query params `?min` e `?max`. | Não |
 | `GET` | `/api/v1/categories` | Retorna uma lista com todas as categorias de livros únicas. | Não |
