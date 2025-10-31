@@ -8,7 +8,7 @@ from urllib.parse import urljoin
 
 DIR = 'data'
 BASE_URL = 'https://books.toscrape.com/'
-DB_NAME = 'tech_challenge_api.db'
+DB_NAME = 'books.db'
 CSV_NAME = 'scraped_books.csv'
 
 def setup_database():
