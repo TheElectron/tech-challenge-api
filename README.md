@@ -33,7 +33,7 @@ A arquitetura da aplicação é composta por três componentes principais:
 Disponível em: (`scripts/scraper.py`)
 
 2.  **Banco de Dados**: Banco de dados **SQLite**, responsável por armazenar todas as informações referentes ao livros, atuando como fonte única de dados . \
-Disponível em: (`data/livros.db`)
+Disponível em: (`data/books.db`)
 
 3.  **API**: Api Flask, rodando num servidor Gunicorn, expõe uma série de endpoints para consulta dos dados disponíveis no banco.
 Disponível em: (`api/app.py`)
@@ -42,7 +42,7 @@ Disponível em: (`api/app.py`)
 
 ### Pré-requisitos
 * Python 3.10 ou superior
-* Gerenciador de pacotes do Python (*pip*)
+* *pip* (Gerenciador de pacotes do Python)
 * Git
 
 ### Passo a passo
@@ -91,6 +91,12 @@ Disponível em: (`api/app.py`)
     Você também pode interagir com a versão disponivel online,
     em https://tech-challenge-api-vjl1.onrender.com/api/v1/.
 
+
+## 📗 Swagger UI (Documentação Interativa)
+
+Fonte primária de documentação para a API, gerada automaticamente pelo Flasgger. Através dela, é possível ver todos os endpoints em detalhes, seus parâmetros, schemas de request e response, além de **executar chamadas de teste em tempo real** diretamente do seu navegador. \
+Disponivel online em: https://tech-challenge-api-vjl1.onrender.com/apidocs/.
+
 ## 📖 Documentação das Rotas
 
 Para mais detalhes, consulte a documentação interativa.
@@ -107,10 +113,3 @@ Para mais detalhes, consulte a documentação interativa.
 | `GET` | `/api/v1/livros/stats/overview` | Retorna um resumo com estatísticas gerais de todos os livros. | Não |
 | `POST` | `/api/v1/trigger-scrape` | Inicia o processo de web scraping em segundo plano (operação assíncrona). | Sim (JWT) |
 ---
-
-### Documentação Interativa (Swagger UI)
-
-Fonte primária de documentação para a API, gerada automaticamente pelo Flasgger. Através dela, é possível ver todos os endpoints em detalhes, seus parâmetros, schemas de request e response, além de **executar chamadas de teste em tempo real** diretamente do seu navegador.
-
-
-
