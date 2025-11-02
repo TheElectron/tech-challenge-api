@@ -25,7 +25,7 @@ Abordando desde a coleta e armazenamento dos dados até o tratamento e disponibi
 
 ## 🏢 Arquitetura
 
-<!-- ![Diagrama de Arquitetura](tech_chalenge_arquitetura.png) -->
+![Diagrama de Arquitetura](final.svg)
 
 A arquitetura da aplicação é composta por três componentes principais:
 
@@ -112,4 +112,12 @@ Para mais detalhes, consulte a documentação interativa.
 | `GET` | `/api/v1/livros/stats` | Retorna estatísticas (contagem e preço médio) agrupadas por categoria. | Não |
 | `GET` | `/api/v1/livros/stats/overview` | Retorna um resumo com estatísticas gerais de todos os livros. | Não |
 | `POST` | `/api/v1/trigger-scrape` | Inicia o processo de web scraping em segundo plano (operação assíncrona). | Sim (JWT) |
----
+
+
+
+## 🚀 Entregaveis
+
+- Descrição completa do projeto ✅
+- ⁠Diagrama visual do projeto ✅
+- [Link do deploy](https://tech-challenge-api-vjl1.onrender.com/api/v1/) ✅ 
+- [Link do vídeo](https://tech-challenge-api-vjl1.onrender.com/api/v1/)  
