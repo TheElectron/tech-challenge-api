@@ -55,9 +55,12 @@
         .hero p { max-width: 600px; margin: 0 auto 30px; }
         
         .api-status {
-            display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px;
+            display: flex; 
+            justify-content: center;
+            align-items: center; gap: 8px; padding: 5px 12px;
             border-radius: 20px; background-color: #e8f5e9; color: #2e7d32;
             font-weight: 500; margin-bottom: 20px;
+            width: 200px; margin-left: auto; margin-right: auto;
         }
         .api-status::before {
             content: ''; width: 10px; height: 10px; border-radius: 50%; background-color: #4caf50;
@@ -124,8 +127,10 @@
             <h1>Pós Tech Fiap</h1>
             <h2>Machine Learning Eng.</h2>
             <h3>TechChallenge #01</h3>
-            <div class="api-status">API Operacional</div>
-            <a href="/apidocs" class="cta-button">Acessar Documentação da API</a>
+            <div class="api-status">
+                API Operacional
+            </div>
+            <a href="/apidocs" class="cta-button">Acesse a Documentação</a>
         </header>
 
         <main class="features">
