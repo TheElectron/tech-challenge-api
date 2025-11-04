@@ -59,7 +59,7 @@ def create_app():
     }
     swagger = Swagger(app)
     # Database Config
-    app.config['DATABASE_PATH'] = os.path.join('data', 'tech_challenge_api.db')
+    app.config['DATABASE_PATH'] = os.path.join('data', 'books.db')
     db.init_app(app)
     # Blueprints for routes and authentication
     app.register_blueprint(auth_bp)
