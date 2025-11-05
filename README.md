@@ -120,4 +120,4 @@ Para mais detalhes, consulte a documentação interativa.
 - Descrição completa do projeto ✅
 - ⁠Diagrama visual do projeto ✅
 - [Link do deploy](https://tech-challenge-api-vjl1.onrender.com/api/v1/) ✅ 
-- [Link do vídeo](https://tech-challenge-api-vjl1.onrender.com/api/v1/)  
+- [Link do vídeo](https://drive.google.com/drive/folders/12yRYJUiJujpUMznBTROywDhfxgMcZA0G?usp=sharing)  ✅ 
