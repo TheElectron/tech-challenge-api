@@ -11,7 +11,7 @@ Este projeto foi desenvolvido para o **Tech Challenge #01** da Pós-Graduação 
 
 Seu objetivo é demonstrar um pipeline de dados *end to end*, desde a extração de dados do site [books.toscrape.com](http://books.toscrape.com/) utilizando web scraping, até sua exposição através de uma API. 
 
-Abordando desde a coleta e armazenamento dos dados até o tratamento e disponibilização para consumo do usuário final.
+Abordando desde a coleta, o tratamento, o armazenamento dos dados e sua disponibilização para consumo.
 
 ## ⭐ Tecnologias Utilizadas
 
