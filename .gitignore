@@ -3,7 +3,7 @@ __pycache__/
 *.pyc
 api-venv/
 .api-venv/
-PosTechTechChallenge.pdf
+# PosTechTechChallenge.pdf
 
 
 # Byte-compiled / optimized / DLL files
